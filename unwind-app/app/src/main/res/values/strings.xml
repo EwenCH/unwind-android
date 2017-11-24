@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Unwind</string>
 
+    <string name="introduction_text1">At Unwind, we get it. Sometimes life gets too much.
+                                    More and more of us are busy, stressed and anxious.
+                                    It is important to unwind - hence our name.</string>
+
+    <string name="introduction_text2">Unwind is here to help you take five during your busy day,
+                                    and you can make of it what you want. It can be a daily journal
+                                    of what is troubling you, and offer you guidance on what to do
+                                    about it. That might be a meditation exercise, or just helping
+                                    you plan your week. Or you can ask us questions about where to
+                                    find help locally.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
