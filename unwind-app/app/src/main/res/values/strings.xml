@@ -20,4 +20,5 @@
 
     <!--TODO - Temporary dev strings-->
     <string name="reset_first_start">(DEV) Reset booleans.</string>
+    <string name="see_user_id">(DEV) See user ID.</string>
 </resources>
