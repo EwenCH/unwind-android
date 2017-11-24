@@ -7,9 +7,14 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -20,6 +25,9 @@ public class MainActivity extends Activity {
     private EditText inputText;
     private Button sendButton;
     private ListView responseList;
+
+    List<String> messages = new ArrayList<>();
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,25 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(this, MainIntroActivity.class);
             startActivityForResult(intent, REQUEST_CODE_INTRO);
         }
+
+        //Initialising components.
+        sendButton = findViewById(R.id.sendButton);
+        inputText = findViewById(R.id.inputText);
+        responseList = findViewById(R.id.responseList);
+
+        //Setting up the adapter for the list view.
+        adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, messages);
+        responseList.setAdapter(adapter);
+
+        //Handle the button being pressed.
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String text = inputText.getText().toString();
+                messages.add(text);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
