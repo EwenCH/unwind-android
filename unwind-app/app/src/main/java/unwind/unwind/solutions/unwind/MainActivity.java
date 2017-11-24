@@ -7,11 +7,19 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
     public static final String PREF_KEY_FIRST_START = "com.unwind.app.PREF_KEY_FIRST_START";
     public static final int REQUEST_CODE_INTRO = 1;
+
+    //Components.
+    private EditText inputText;
+    private Button sendButton;
+    private ListView responseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

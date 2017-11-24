@@ -1,4 +1,6 @@
 <resources>
+
+    <!--App Strings-->
     <string name="app_name">Unwind</string>
 
     <string name="introduction_text1">At Unwind, we get it. Sometimes life gets too much.
@@ -11,6 +13,10 @@
                                     about it. That might be a meditation exercise, or just helping
                                     you plan your week. Or you can ask us questions about where to
                                     find help locally.</string>
+
+    <!--Button/component strings-->
+    <string name="send_button_text">Go</string>
+    <string name="text_input_hint">What\'s up?</string>
 
     <!--TODO - Temporary dev strings-->
     <string name="reset_first_start">(DEV) Reset booleans.</string>
