@@ -12,6 +12,6 @@
                                     you plan your week. Or you can ask us questions about where to
                                     find help locally.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--TODO - Temporary dev strings-->
+    <string name="reset_first_start">(DEV) Reset booleans.</string>
 </resources>
