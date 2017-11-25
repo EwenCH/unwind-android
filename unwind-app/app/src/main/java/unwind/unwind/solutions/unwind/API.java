@@ -60,7 +60,7 @@ public class API {
 
         StringBuilder sb = new StringBuilder();
         for (String str: resultStrings) {
-            sb.append(str).append(" ");
+            sb.append(str).append("\n");
         }
 
         return sb.toString();
