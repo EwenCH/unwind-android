@@ -9,7 +9,6 @@ import okhttp3.Request;
 /**
  * Class to handle calling the Unwind bot API.
  */
-//TODO - Comment this all n stuff.
 public class API {
 
     private OkHttpClient okHttpClient = new OkHttpClient();
@@ -49,7 +48,7 @@ public class API {
 
     }
 
-    public static String[] cleanResults(String input) {
+    public static String cleanResults(String input) {
         String trimmedInput = input.replace("[", "");
         trimmedInput = trimmedInput.replace("]", "");
 
@@ -59,7 +58,12 @@ public class API {
             resultStrings[i] = resultStrings[i].replace("\"", "");
         }
 
-        return resultStrings;
+        StringBuilder sb = new StringBuilder();
+        for (String str: resultStrings) {
+            sb.append(str).append(" ");
+        }
+
+        return sb.toString();
     }
 
 }

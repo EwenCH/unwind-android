@@ -1,25 +1,28 @@
 package unwind.unwind.solutions.unwind;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import okhttp3.Call;
@@ -33,11 +36,8 @@ public class MainActivity extends Activity {
 
     //Components.
     private EditText inputText;
-    private Button sendButton;
-    private ListView responseList;
-
-    List<String> messages = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    private Button keyboardButton;
+    private TextView botResponse;
 
     private String userID;
 
@@ -45,6 +45,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Defining some animations.
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        in.setDuration(500);
+        final Animation out = new AlphaAnimation(1.0f, 0.0f);
+        out.setDuration(500);
 
         //Set the status bar colour.
         this.getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
@@ -62,73 +68,105 @@ public class MainActivity extends Activity {
         userID = UUID.randomUUID().toString();
 
         //Initialising components.
-        sendButton = findViewById(R.id.sendButton);
+        keyboardButton = findViewById(R.id.keyboardButton);
         inputText = findViewById(R.id.inputText);
-        responseList = findViewById(R.id.responseList);
+        botResponse = findViewById(R.id.botResponse);
 
-        //Setting up the adapter for the list view.
-        adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, messages);
-        responseList.setAdapter(adapter);
-
-        /*
+        //Empty message to get first message.
         API.getInstance(getApplicationContext()).postMessage(userID, "", new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                messages.add("Connection error");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Connection Error.",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                e.printStackTrace();
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String body = response.body().string();
-                String[] results = API.cleanResults(body);
-                messages.add(results.toString());
-            }
-        });
-        adapter.notifyDataSetChanged();
-        */
-
-        //Handle the button being pressed.
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                final String text = inputText.getText().toString();
-                messages.add(text);
-                adapter.notifyDataSetChanged();
-
-                AsyncTask.execute(new Runnable() {
+                final String result = API.cleanResults(body);
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        API.getInstance(getApplicationContext()).postMessage(userID, text, new Callback() {
-                            @Override
-                            public void onFailure(Call call, IOException e) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        messages.add("Connection error.");
-                                        adapter.notifyDataSetChanged();
-                                    }
-                                });
-                                e.printStackTrace();
-                            }
-
-                            @Override
-                            public void onResponse(Call call, Response response) throws IOException {
-                                String body = response.body().string();
-                                final String[] results = API.cleanResults(body);
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        for (String r : results) {
-                                            messages.add(r);
-                                        }
-                                        adapter.notifyDataSetChanged();
-                                    }
-                                });
-                                Log.i("API", results.toString());
-                            }
-                        });
+                        botResponse.startAnimation(out);
+                        botResponse.setText(result);
+                        botResponse.startAnimation(in);
                     }
                 });
+                Log.i("API", result.toString());
+            }
+        });
+
+        inputText.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+
+                    String text = inputText.getText().toString();
+                    API.getInstance(getApplicationContext()).postMessage(userID, text, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Connection Error.",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String body = response.body().string();
+                            final String result = API.cleanResults(body);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    botResponse.setAnimation(out);
+                                    botResponse.setText(result);
+                                    botResponse.startAnimation(in);
+
+                                    inputText.setText("");
+                                    inputText.requestFocus();
+                                    inputText.setFocusableInTouchMode(true);
+                                    inputText.setCursorVisible(false);
+
+                                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                    imm.showSoftInput(inputText, InputMethodManager.SHOW_FORCED);
+                                    inputText.setCursorVisible(true);
+                                }
+                            });
+                            Log.i("API", result.toString());
+                        }
+                    });
+                    inputText.setCursorVisible(false);
+                    return true;
+                }
+                inputText.setCursorVisible(false);
+                return false;
+            }
+        });
+
+        //Handle the button being pressed.
+        keyboardButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                inputText.requestFocus();
+                inputText.setFocusableInTouchMode(true);
+                inputText.setCursorVisible(true);
+
+                inputText.setText("");
+                inputText.startAnimation(in);
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(inputText, InputMethodManager.SHOW_FORCED);
             }
         });
     }

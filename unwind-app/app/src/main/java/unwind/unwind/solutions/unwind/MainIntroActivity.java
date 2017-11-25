@@ -26,9 +26,19 @@ public class MainIntroActivity extends IntroActivity {
 
         //Description slide 1.
         addSlide(new SimpleSlide.Builder()
-                .title(R.string.app_name)
+                .title("What are we?")
                 .description(R.string.introduction_text2)
-                .image(R.drawable.mi_ic_previous) //TODO - Placeholder image.
+                .image(R.drawable.mi_ic_next) //TODO - Placeholder image.
+                .background(R.color.colorPrimary)
+                .backgroundDark(R.color.colorPrimaryDark)
+                .scrollable(false)
+                .build());
+
+        //Description slide 2.
+        addSlide(new SimpleSlide.Builder()
+                .title("Your privacy.")
+                .description(R.string.introduction_text3)
+                .image(R.drawable.mi_ic_next)
                 .background(R.color.colorPrimary)
                 .backgroundDark(R.color.colorPrimaryDark)
                 .scrollable(false)

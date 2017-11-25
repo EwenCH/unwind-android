@@ -6,34 +6,52 @@
     android:layout_height="match_parent"
     tools:context="unwind.unwind.solutions.unwind.MainActivity">
 
-    <EditText
-        android:id="@+id/inputText"
-        android:layout_width="213dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/text_input_hint"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/responseList"
+    <TextView
+        android:id="@+id/botResponse"
+        android:layout_width="363dp"
+        android:layout_height="159dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/inputText"
+        android:layout_width="367dp"
+        android:layout_height="76dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:cursorVisible="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:ems="10"
+        android:focusedByDefault="false"
+        android:gravity="center"
+        android:inputType="text"
+        android:selectAllOnFocus="false"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botResponse" />
+
     <Button
-        android:id="@+id/sendButton"
+        android:id="@+id/keyboardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="240dp"
-        android:text="@string/send_button_text"
-        app:layout_constraintBaseline_toBaselineOf="@+id/inputText"
-        app:layout_constraintStart_toStartOf="@+id/inputText" />
-
-    <ListView
-        android:id="@+id/responseList"
-        android:layout_width="0dp"
-        android:layout_height="622dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Talk to me"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/inputText" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

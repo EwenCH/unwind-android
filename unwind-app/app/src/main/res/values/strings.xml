@@ -11,8 +11,12 @@
                                     and you can make of it what you want. It can be a daily journal
                                     of what is troubling you, and offer you guidance on what to do
                                     about it. That might be a meditation exercise, or just helping
-                                    you plan your week. Or you can ask us questions about where to
+                                    you plan your week. You can also ask us where to
                                     find help locally.</string>
+
+    <string name="introduction_text3">Privacy is important to us. Anything you share with our bot is
+                                    completely confidential to you. We will not share any of your
+                                    information.</string>
 
     <!--Button/component strings-->
     <string name="send_button_text">Go</string>
