@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +45,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Set the status bar colour.
+        this.getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
 
         //Find out if this is the first time the app is being opened.
         boolean firstStart = PreferenceManager.getDefaultSharedPreferences(this)
@@ -114,7 +118,9 @@ public class MainActivity extends Activity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        messages.add(results.toString());
+                                        for (String r : results) {
+                                            messages.add(r);
+                                        }
                                         adapter.notifyDataSetChanged();
                                     }
                                 });

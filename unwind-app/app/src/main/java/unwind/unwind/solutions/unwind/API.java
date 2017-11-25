@@ -1,16 +1,10 @@
 package unwind.unwind.solutions.unwind;
 
 import android.content.Context;
-
-import java.io.IOException;
 import java.util.Locale;
-
 import okhttp3.Callback;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * Class to handle calling the Unwind bot API.
@@ -46,10 +40,10 @@ public class API {
     }
 
     public void postMessage(String userId, String message, Callback callback) {
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), String.format(Locale.UK, "{ id: %s, input: %s }", userId, message));
+        //RequestBody body = RequestBody.create(null, new byte[]{}); //(MediaType.parse("application/json; charset=utf-8"), "");
         Request request = new Request.Builder()
                 .url(String.format(Locale.UK, "http://unwind.azurewebsites.net/api/add?id=%s&input=%s", userId, message))
-                .post(body)
+                .get()
                 .build();
             okHttpClient.newCall(request).enqueue(callback);
 
@@ -59,7 +53,7 @@ public class API {
         String trimmedInput = input.replace("[", "");
         trimmedInput = trimmedInput.replace("]", "");
 
-        String[] resultStrings = trimmedInput.split(",");
+        String[] resultStrings = trimmedInput.split("\",");
 
         for (int i = 0; i < resultStrings.length; i++) {
             resultStrings[i] = resultStrings[i].replace("\"", "");
