@@ -1,13 +1,13 @@
 package unwind.unwind.solutions.unwind;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
-
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
-import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
 import com.heinrichreimersoftware.materialintro.slide.SimpleSlide;
 
+/**
+ * Class that creates and shows the introduction slides when the app is first opened on a user's
+ * phone. Created using the Material Intro library.
+ */
 public class MainIntroActivity extends IntroActivity {
 
     @Override
@@ -18,7 +18,7 @@ public class MainIntroActivity extends IntroActivity {
         addSlide(new SimpleSlide.Builder()
                 .title(R.string.app_name)
                 .description(R.string.introduction_text1)
-                .image(R.drawable.mi_ic_next) //TODO - Placeholder image.
+                .image(R.drawable.happy)
                 .background(R.color.colorPrimary)
                 .backgroundDark(R.color.colorPrimaryDark)
                 .scrollable(false)
@@ -26,9 +26,9 @@ public class MainIntroActivity extends IntroActivity {
 
         //Description slide 1.
         addSlide(new SimpleSlide.Builder()
-                .title("What are we?")
+                .title(R.string.intro_title1)
                 .description(R.string.introduction_text2)
-                .image(R.drawable.mi_ic_next) //TODO - Placeholder image.
+                .image(R.drawable.relax)
                 .background(R.color.colorPrimary)
                 .backgroundDark(R.color.colorPrimaryDark)
                 .scrollable(false)
@@ -36,9 +36,9 @@ public class MainIntroActivity extends IntroActivity {
 
         //Description slide 2.
         addSlide(new SimpleSlide.Builder()
-                .title("Your privacy.")
+                .title(R.string.intro_title2)
                 .description(R.string.introduction_text3)
-                .image(R.drawable.mi_ic_next)
+                .image(R.drawable.lock)
                 .background(R.color.colorPrimary)
                 .backgroundDark(R.color.colorPrimaryDark)
                 .scrollable(false)

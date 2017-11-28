@@ -2,17 +2,17 @@
 
     <!--App Strings-->
     <string name="app_name">Unwind</string>
+    <string name="intro_title1">What are we?</string>
+    <string name="intro_title2">Your privacy.</string>
 
     <string name="introduction_text1">At Unwind, we get it. Sometimes life gets too much.
                                     More and more of us are busy, stressed and anxious.
-                                    It is important to unwind - hence our name.</string>
+                                    We think it is important to unwind - hence our name.</string>
 
     <string name="introduction_text2">Unwind is here to help you take five during your busy day,
                                     and you can make of it what you want. It can be a daily journal
                                     of what is troubling you, and offer you guidance on what to do
-                                    about it. That might be a meditation exercise, or just helping
-                                    you plan your week. You can also ask us where to
-                                    find help locally.</string>
+                                    about it.</string>
 
     <string name="introduction_text3">Privacy is important to us. Anything you share with our bot is
                                     completely confidential to you. We will not share any of your
@@ -21,8 +21,9 @@
     <!--Button/component strings-->
     <string name="send_button_text">Go</string>
     <string name="text_input_hint">What\'s up?</string>
+    <string name="conn_fail">Connection error.</string>
 
-    <!--TODO - Temporary dev strings-->
+    <!-- Temporary dev strings-->
     <string name="reset_first_start">(DEV) Reset booleans.</string>
     <string name="see_user_id">(DEV) See user ID.</string>
 </resources>
