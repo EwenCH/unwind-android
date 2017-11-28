@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--TODO - Dev menu options, do not keep in production-->
+    <item android:id="@+id/reset_first_start_menu"
+        android:title="@string/reset_first_start"/>
+    <item android:id="@+id/see_user_id"
+        android:title="@string/see_user_id"/>
+</menu>
